@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/toCurrentOrder"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="sans-serif-medium"
+        android:onClick="toCurrentOrders"
+        android:text="@string/current_orders"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:gravity="center"
+        app:backgroundTint="@color/colorPrimary"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="442dp" />
+
+    <Button
+        android:id="@+id/toAllOrder"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="sans-serif-medium"
+        android:onClick="toAllOrder"
+        android:text="@string/all_orders"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:backgroundTint="@color/colorPrimary"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="442dp" />
+
+
+</LinearLayout>

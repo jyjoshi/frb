@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.frb">
+
+<!--    <application-->
+<!--        android:allowBackup="true"-->
+<!--        android:icon="@mipmap/ic_launcher"-->
+<!--        android:label="@string/app_name"-->
+<!--        android:roundIcon="@mipmap/ic_launcher_round"-->
+<!--        android:supportsRtl="true"-->
+<!--        android:theme="@style/Theme.Frb"-->
+<!--        -->
+<!--        >-->
+    <application
+        android:requestLegacyExternalStorage="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:name=".activities.NotificationClass"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".activities.AdminViewMenuActivity" />
+
+        <service android:name=".services.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+
+        <activity
+            android:name=".activities.AdminCurrentOrdersActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.AdminOrderActivity"
+            android:exported="true"
+            android:label="@string/title_activity_admin_order"
+            android:theme="@style/Theme.Frb.NoActionBar" />
+        <activity android:name=".activities.EditFoodActivity" />
+        <activity android:name=".activities.PreviousOrderItemsActivity" />
+        <activity android:name=".activities.PasswordResetActivity" />
+        <activity android:name=".activities.EnterPhoneActivity" />
+        <activity android:name=".activities.AdminMenuEditOptionsActivity" />
+        <activity android:name=".activities.ExistingMenuEditorActivity" />
+        <activity android:name=".activities.VerifyPhoneActivity" />
+        <activity android:name=".activities.AdminViewOrderItemsActivity" />
+        <activity android:name=".activities.AdminViewOrderActivity" />
+        <activity
+            android:name=".activities.AdminHomeActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.MenuEditorActivity"
+            android:parentActivityName=".activities.AdminHomeActivity" />
+        <activity
+            android:name=".activities.SignUpActivity"
+            android:parentActivityName=".activities.MainActivity" />
+
+
+
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Frb.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+
+</manifest>
