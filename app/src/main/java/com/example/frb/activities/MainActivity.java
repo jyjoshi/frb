@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     int check=1;
     int check2 = 0;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseDatabase database = FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/");
     DatabaseReference dbRef = database.getReference();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     EditText phone;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Bill");
+        DatabaseReference root = FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/").getReference("Bill");
         int time = 100;
         int price = 150;
         int tId = 1001;
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             Bill bill = new Bill(sTime, sPrice, sTId, phone, token);
             root.child(sTId).setValue(bill);
 
-            FirebaseDatabase.getInstance().getReference().child("Status").child(sTId).setValue(Integer.toString(0));
+            FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/").getReference().child("Status").child(sTId).setValue(Integer.toString(0));
 
             time++;
             price++;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         if(currentUser != null){
             String phoneNo = currentUser.getPhoneNumber().substring(3);
             Log.d("FirebaseAuth Phone", "Phone Number is " + phoneNo);
-            FirebaseDatabase.getInstance().getReference("Users").child(phoneNo).addListenerForSingleValueEvent(new ValueEventListener() {
+            FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/").getReference("Users").child(phoneNo).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateMessagingToken(String phoneNumber, String messagingToken) {
-        FirebaseDatabase.getInstance().getReference().child("MessageIds").child(phoneNumber).setValue(messagingToken);
+        FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/").getReference().child("MessageIds").child(phoneNumber).setValue(messagingToken);
     }
 
     @Override

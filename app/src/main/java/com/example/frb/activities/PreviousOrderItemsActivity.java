@@ -37,7 +37,7 @@ public class PreviousOrderItemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_previous_order_items);
 
         orderedItems = new ArrayList<>();
-        dbref = FirebaseDatabase.getInstance().getReference().child("OrderedItems");
+        dbref = FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/").getReference().child("OrderedItems");
         recyclerView = findViewById(R.id.recyclerview_view_order);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

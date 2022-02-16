@@ -78,7 +78,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         otp = findViewById(R.id.enter_phone_for_verification);
         progressBar = findViewById(R.id.progressBar_verify_phone);
         progressBar.setVisibility(View.INVISIBLE);
-        reference = FirebaseDatabase.getInstance().getReference();
+        reference = FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/").getReference();
 
 
         String phone = getIntent().getStringExtra("phoneNo");

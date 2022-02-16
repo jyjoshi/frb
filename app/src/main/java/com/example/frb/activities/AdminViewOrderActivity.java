@@ -41,7 +41,7 @@ public class AdminViewOrderActivity extends AppCompatActivity {
         time = new ArrayList<>();
         amount = new ArrayList<>();
 
-        dbref = FirebaseDatabase.getInstance().getReference("Bill");
+        dbref = FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/").getReference("Bill");
 
         //initDataset();
         Log.i("after initializing", String.valueOf((transactionId.size() )));

@@ -28,9 +28,9 @@ public class SignUpActivity extends AppCompatActivity {
     EditText password;
     EditText confirmPassword;
     EditText phone;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseDatabase database = FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/");
     DatabaseReference dbRef = database.getReference();
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+    DatabaseReference reference = FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/").getReference("Users");
     ArrayList<Integer> checker;
     ArrayList<UserDB> user;
     @Override

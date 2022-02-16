@@ -64,7 +64,7 @@ public class PasswordResetActivity extends AppCompatActivity {
     public void resetPassword(View view) throws InterruptedException {
         checkDataEntered();
         if(check==1){
-            FirebaseDatabase.getInstance().getReference().child("Users").child(phoneNumber).child("password").setValue(password.getText().toString());
+            FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/").getReference().child("Users").child(phoneNumber).child("password").setValue(password.getText().toString());
             Toast.makeText(this, "Password has been changed successfully", Toast.LENGTH_SHORT).show();
             TimeUnit.SECONDS.sleep(2);
             startActivity(new Intent(this, MainActivity.class));

@@ -34,7 +34,7 @@ public class ExistingMenuEditorActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         menuItems = new ArrayList<>();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/").getReference();
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
