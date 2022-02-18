@@ -187,7 +187,7 @@ public class    MenuEditorActivity extends AppCompatActivity {
         }
         if(check==1)
         {
-            FirebaseDatabase database = FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/");
+            FirebaseDatabase database = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/");
             String key = database.getReference("Menu").push().getKey();
             MenuItem menuItem = new MenuItem(
                     stringUri,

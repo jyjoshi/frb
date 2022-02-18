@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class AdminViewMenuActivity extends AppCompatActivity {
 
     private ArrayList<MenuItem> menuItems = new ArrayList<>();
-    private FirebaseDatabase database = FirebaseDatabase.getInstance("https://canteen-management-systems-19bce.asia-southeast1.firebasedatabase.app/");
+    private FirebaseDatabase database = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/");
     private DatabaseReference dbref = database.getReference("Menu");
     private RecyclerView recyclerView;
 

@@ -29,7 +29,7 @@ public class MenuAdapter extends RecyclerView.Adapter<com.example.frb.adapters.M
     ArrayList<MenuItem> item;
     Context context;
     String phoneNumber;
-    DatabaseReference root = FirebaseDatabase.getInstance().getReference().child("temp");
+    DatabaseReference root = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference().child("temp");
 
 
     public MenuAdapter(ArrayList<MenuItem> item, ArrayList<Integer> quantity, String phoneNumber) {

@@ -29,7 +29,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d("My Messaging Service", "The token refreshed:" + s);
         if(mAuth.getCurrentUser() != null) {
             String phoneNo = mAuth.getCurrentUser().getPhoneNumber();
-            FirebaseDatabase.getInstance().getReference().child("MessageIds").child(phoneNo).setValue(s);
+            FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference().child("MessageIds").child(phoneNo).setValue(s);
         }
 
 
