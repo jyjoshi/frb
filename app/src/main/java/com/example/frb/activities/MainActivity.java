@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.frb.R;
 import com.example.frb.models.Bill;
+import com.example.frb.models.Canteen;
 import com.example.frb.models.UserDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     String firstName;
     String lastName;
+    String name;
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-//
         updateUI(currentUser);
     }
 
@@ -80,13 +81,12 @@ public class MainActivity extends AppCompatActivity {
         if(currentUser != null){
             String phoneNo = currentUser.getPhoneNumber().substring(3);
             Log.d("FirebaseAuth Phone", "Phone Number is " + phoneNo);
-            FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference("Users").child(phoneNo).addListenerForSingleValueEvent(new ValueEventListener() {
+            FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference("Canteens").child(phoneNo).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
-                        UserDB temp = snapshot.getValue(UserDB.class);
-                        firstName = temp.getFirstName();
-                        lastName = temp.getLastName();
+                        Canteen canteen = snapshot.getValue(Canteen.class);
+                        name = canteen.getName();
                     }
 
                     FirebaseMessaging.getInstance().getToken()
@@ -110,11 +110,10 @@ public class MainActivity extends AppCompatActivity {
                             });
 
 
-//                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class); //Check getApplicationContext() ; I put it because it didn't give error.
-//                    intent.putExtra("phone", phoneNo);
-//                    intent.putExtra("firstName", firstName);
-//                    intent.putExtra("lastName", lastName);
-//                    startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(), AdminHomeActivity.class); //Check getApplicationContext() ; I put it because it didn't give error.
+                    intent.putExtra("phone", phoneNo);
+                    intent.putExtra("name", name);
+                    startActivity(intent);
 
                 }
                 @Override
@@ -127,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateMessagingToken(String phoneNumber, String messagingToken) {
-        FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference().child("MessageIds").child(phoneNumber).setValue(messagingToken);
+        FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference().child("CanteenMessageIds").child(phoneNumber).setValue(messagingToken);
     }
 
     @Override

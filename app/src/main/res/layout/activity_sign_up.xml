@@ -10,10 +10,10 @@
     tools:context=".activities.SignUpActivity">
 
     <TextView
-        android:id="@+id/textViewFirstName"
+        android:id="@+id/textViewCanteenName"
         android:layout_width="246dp"
         android:layout_height="wrap_content"
-        android:text="@string/first_name"
+        android:text="@string/canteen_name"
         android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp"
@@ -21,7 +21,7 @@
         tools:layout_editor_absoluteY="140dp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextCanteenName"
         android:layout_width="246dp"
         android:layout_height="wrap_content"
         android:autofillHints=""
@@ -32,30 +32,6 @@
         tools:layout_editor_absoluteX="83dp"
         tools:layout_editor_absoluteY="164dp" />
 
-
-    <TextView
-        android:id="@+id/textViewLastName"
-        android:layout_width="246dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/last_name"
-        android:textColor="@color/white"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="217dp" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonLastName2"
-        android:layout_width="246dp"
-        android:layout_height="wrap_content"
-        android:autofillHints="username"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="@color/white"
-        tools:ignore="LabelFor"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="241dp" />
 
     <TextView
         android:id="@+id/textViewPhoneNo"

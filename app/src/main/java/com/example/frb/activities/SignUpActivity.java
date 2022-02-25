@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.frb.R;
+import com.example.frb.models.Canteen;
 import com.example.frb.models.UserDB;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,35 +24,32 @@ import java.util.ArrayList;
 public class SignUpActivity extends AppCompatActivity {
     int check =1;
     private String entryPoint;
-    EditText firstName;
+    EditText name;
     EditText lastName;
     EditText password;
     EditText confirmPassword;
     EditText phone;
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/");
     DatabaseReference dbRef = database.getReference();
-    DatabaseReference reference = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference("Users");
-    ArrayList<Integer> checker;
-    ArrayList<UserDB> user;
+    DatabaseReference reference = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference("Canteens");
+    ArrayList<UserDB> canteens;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_sign_up);
 
-        firstName = findViewById(R.id.editTextTextPersonName);
-        lastName = findViewById(R.id.editTextTextPersonLastName2);
+        name = findViewById(R.id.editTextCanteenName);
         password = findViewById(R.id.editTextTextPassword);
         confirmPassword = findViewById(R.id.editTextTextPassword2);
         phone = findViewById(R.id.editTextPhone);
-        checker = new ArrayList<>();
-        user = new ArrayList<>();
+        canteens = new ArrayList<>();
 
         Intent intentIn = getIntent();
         Bundle b = intentIn.getExtras();
 
         if(b!=null){
-            entryPoint =(String) b.get("entryPoint");
+            entryPoint = (String) b.get("entryPoint");
         }
 
 
@@ -66,8 +64,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     void checkDataEntered() {
 
-        if (isEmpty(firstName)) {
-            firstName.setError("First Name is required");
+        if (isEmpty(name)) {
+            name.setError("First Name is required");
             check=0;
         }
         if (isEmpty(phone)) {
@@ -75,10 +73,6 @@ public class SignUpActivity extends AppCompatActivity {
             check=0;
         }
 
-        if (isEmpty(lastName)) {
-            lastName.setError("Last name is required!");
-            check=0;
-        }
         if (isEmpty(password)){
             password.setError("Password can't be empty");
             check=0;
@@ -86,6 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
         if(!password.getText().toString().equals(confirmPassword.getText().toString()))
         {
             password.setError("Passwords do not match");
+            confirmPassword.setError("Passwords do not match");
             check=0;
         }
 
@@ -100,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    int check = 1;
+                    int check = 1; // Check if an account with the given phone number already exists.
                     for(DataSnapshot snapshot1 : snapshot.getChildren()){
                         UserDB temp = snapshot1.getValue(UserDB.class);
                         if(temp.getPhone().equals(phone.getText().toString())){
@@ -109,20 +104,17 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     }
                     if(check==1){
-                        UserDB user = new UserDB(
+                        Canteen canteen = new Canteen(
                                 phone.getText().toString(),
-                                firstName.getText().toString(),
-                                lastName.getText().toString(),
-                                password.getText().toString()
-                        );
+                                name.getText().toString(),
+                                password.getText().toString());
 
                         Intent intent = new Intent(getApplicationContext(), com.example.frb.activities.VerifyPhoneActivity.class);
                         intent.putExtra("requirement", "sign_up");
                         intent.putExtra("entryPoint", entryPoint);
-                        intent.putExtra("phoneNo", phone.getText().toString());
-                        intent.putExtra("firstName", user.getFirstName());
-                        intent.putExtra("lastName", user.getLastName());
-                        intent.putExtra("password", user.getPassword());
+                        intent.putExtra("phoneNo", canteen.getPhone());
+                        intent.putExtra("name", canteen.getName());
+                        intent.putExtra("password", canteen.getPassword());
                         startActivity(intent);
 
                         /*dbRef.child("Users").child(phone.getText().toString()).setValue(user);

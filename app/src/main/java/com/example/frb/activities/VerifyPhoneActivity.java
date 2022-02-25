@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.frb.R;
+import com.example.frb.models.Canteen;
 import com.example.frb.models.UserDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,7 +38,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     String verificationId;
 
     String phone;
-    String firstName;
+    String name;
     String lastName;
     String password;
 
@@ -67,8 +68,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             requirement = (String) b.get("requirement");
             if(requirement.equals("sign_up")) {
                 entryPoint = (String) b.get("entryPoint");
-                firstName = (String) b.get("firstName");
-                lastName = (String) b.get("lastName");
+                name = (String) b.get("name");
                 password = (String) b.get("password");
             }
         }
@@ -218,13 +218,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     //Do what you want.
                     if(requirement.equals("sign_up")) {
-                        if(entryPoint.equals("Main")) {
-                            user = new UserDB(phone, firstName, lastName, password);
-                        }
-                        else if (entryPoint.equals("Admin")){
-                            user = new UserDB(phone, firstName, lastName, password, true);
-                        }
-                        reference.child("Users").child(phone).setValue(user);
+                        Canteen canteen = new Canteen(phone, name, password);
+                        reference.child("Canteens").child(phone).setValue(canteen);
                         Toast.makeText(com.example.frb.activities.VerifyPhoneActivity.this, "Account successfully created!", Toast.LENGTH_SHORT).show();
                         try {
                             TimeUnit.SECONDS.sleep(2);
