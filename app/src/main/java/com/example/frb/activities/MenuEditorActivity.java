@@ -50,10 +50,10 @@ public class    MenuEditorActivity extends AppCompatActivity {
     private EditText foodPrice;
     private EditText foodDescription;
 
-    private Bitmap bitmap;
-
-    private File tempDir;
-    private File tempFile;
+//    private Bitmap bitmap;
+//
+//    private File tempDir;
+//    private File tempFile;
 
     private FileOutputStream fos;
 
@@ -76,7 +76,7 @@ public class    MenuEditorActivity extends AppCompatActivity {
 
         progressBar.setVisibility(View.INVISIBLE);
 
-        tempDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        tempDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
         imageView.setOnClickListener(v -> {
             Intent galleryIntent = new Intent();
@@ -217,7 +217,7 @@ public class    MenuEditorActivity extends AppCompatActivity {
             stringUri = uri1.toString();
             Log.i("Value of stringUri", stringUri);
             Toast.makeText(com.example.frb.activities.MenuEditorActivity.this, "Uploaded Successfully", Toast.LENGTH_LONG).show();
-            tempFile.delete();
+//            tempFile.delete();
         })).addOnProgressListener(snapshot -> progressBar.setVisibility(View.VISIBLE)).addOnFailureListener(e -> {
             progressBar.setVisibility(View.INVISIBLE);
             Toast.makeText(com.example.frb.activities.MenuEditorActivity.this, "Uploading Failed", Toast.LENGTH_LONG).show();
