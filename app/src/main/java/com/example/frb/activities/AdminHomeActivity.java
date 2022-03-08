@@ -28,6 +28,10 @@ public class AdminHomeActivity extends AppCompatActivity {
         startActivity(new Intent(view.getContext(), com.example.frb.activities.AdminMenuEditOptionsActivity.class));
     }
 
+    public void toAdminPlaceOrder(View view) {
+        
+    }
+
 /*    public void toTeacherSignUp(View view) {
         Intent intent = new Intent(view.getContext(), SignUpActivity.class);
         intent.putExtra("entryPoint", "Admin");

@@ -53,6 +53,21 @@
         tools:layout_editor_absoluteY="442dp" />
 
     <Button
+        android:id="@+id/adminPlaceOrder"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:onClick="toAdminPlaceOrder"
+        android:text="@string/place_order"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:backgroundTint="@color/colorPrimary"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="442dp" />
+
+    <Button
         android:id="@+id/toTeacherSignUp"
         android:layout_width="220dp"
         android:layout_height="60dp"
