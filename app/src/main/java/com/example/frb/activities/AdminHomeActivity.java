@@ -29,7 +29,7 @@ public class AdminHomeActivity extends AppCompatActivity {
     }
 
     public void toAdminPlaceOrder(View view) {
-        
+        startActivity(new Intent(view.getContext(), com.example.frb.activities.AdminPlaceOrderActivity.class));
     }
 
 /*    public void toTeacherSignUp(View view) {
