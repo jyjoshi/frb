@@ -5,22 +5,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import java.util.concurrent.TimeUnit;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.frb.R;
 import com.example.frb.adapters.CartAdapter;
+import com.example.frb.models.Bill;
 import com.example.frb.models.FoodQuantity;
 import com.example.frb.models.MenuItem;
+import com.example.frb.models.OrderedItem;
+import com.example.frb.models.UserDB;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class AdminCartActivity extends AppCompatActivity {
@@ -36,7 +45,7 @@ public class AdminCartActivity extends AppCompatActivity {
     String time;
     TextView costDisplay;
     DatabaseReference root;
-    DatabaseReference retrieveTemp;
+    DatabaseReference billRoot;
     ArrayList<FoodQuantity> itemsOrdered;
     private EditText address;
     private String stringAddress;
@@ -124,7 +133,86 @@ public class AdminCartActivity extends AppCompatActivity {
 
 
     public void adminPlaceOrder(View view) {
-    }
+        //Storing time when order was placed
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        time = dtf.format(now);
+
+        //Generating transaction id
+        transactionId = root.push().getKey();
+        billRoot = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference().child("Bill");
+
+        root.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DatabaseReference toOrderedItems = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference().child("OrderedItems");
+                for (DataSnapshot snapshot1 : snapshot.child("temp").child(phoneNumber).getChildren()) {
+                    Log.i("TAG", "INSIDE TEMPORDERITEMS");
+                    String name = snapshot1.getKey();
+                    FoodQuantity val = snapshot1.getValue(FoodQuantity.class);
+                    int qty = val.getQuantity();
+                    for (DataSnapshot snapshot11 : snapshot.child("Menu").getChildren()) {
+                        MenuItem tempItem = snapshot11.getValue(MenuItem.class);
+                        if (tempItem.getName().equals(name)) {
+                            Log.i("TAG", "ITEM FOUND IN MENU");
+                            String price = tempItem.getPrice();
+                            String result = String.valueOf(Integer.parseInt(price) * qty);
+                            OrderedItem ob = new OrderedItem(transactionId, name, String.valueOf(qty), price, result);
+                            String key = toOrderedItems.push().getKey();
+                            toOrderedItems.child(key).setValue(ob);
+                            break;
+                        }
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        root.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                token = snapshot.child("Token").getValue(Integer.class) + 1;
+                if (token.equals(10000)) {
+                    token = 1001;
+                }
+                root.child("Token").setValue(token);
+                UserDB temp = snapshot.child("Users").child(phoneNumber).getValue(UserDB.class);
+                Log.d("Phone Number", phoneNumber);
+                {
+                    Log.i("TAG ", "Student");
+                    Bill bill = new Bill(time, String.valueOf(totalCost), transactionId, phoneNumber, token);
+                    billRoot.child(transactionId).setValue(bill);
+                }
+                root.child("Status").child(transactionId).setValue(Integer.toString(0)); // Set the status regardless of who ordered to 0
+                Toast.makeText(getApplicationContext(), "Order Placed", Toast.LENGTH_LONG).show();
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                    root.child("temp").child(phoneNumber).removeValue();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        Intent intent = new Intent(this, AdminHomeActivity.class);
+        startActivity(intent);
+
+        }
     public int sum(ArrayList<Integer> x) {
         int total = 0;
         for (int i : x) {
