@@ -50,18 +50,17 @@ public class AdminViewOrderItemsActivity extends AppCompatActivity {
         }
         //recyclerView.setAdapter(new OrderItemsAdapter(orderedItems));
 
-        dbref.addValueEventListener(new ValueEventListener() {
+        dbref.child(transactionId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snapshot1 : snapshot.getChildren()){
+
                     OrderedItem orderedItem = snapshot1.getValue(OrderedItem.class);
-                    Log.i("tvalue", orderedItem.getTransactionId());
-                    if(orderedItem.getTransactionId().equals(transactionId)){
-                        Log.i("innside", "items with thransaction id spotted");
-                        orderedItems.add(orderedItem);
-                        orderItemsAdapter = new OrderItemsAdapter(orderedItems);
-                        recyclerView.setAdapter(orderItemsAdapter);
-                    }
+                    Log.i("innside", "items with thransaction id spotted");
+                    orderedItems.add(orderedItem);
+                    orderItemsAdapter = new OrderItemsAdapter(orderedItems);
+                    recyclerView.setAdapter(orderItemsAdapter);
+
                 }
             }
 
