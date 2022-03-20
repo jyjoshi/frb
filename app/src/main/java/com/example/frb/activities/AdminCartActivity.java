@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import android.os.Bundle;
@@ -142,6 +144,8 @@ public class AdminCartActivity extends AppCompatActivity {
         transactionId = root.push().getKey();
         billRoot = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference().child("Bill");
 
+        HashMap<String, OrderedItem> orderedItemHashMap = new HashMap<>();
+
         root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -156,15 +160,13 @@ public class AdminCartActivity extends AppCompatActivity {
                         if (tempItem.getName().equals(name)) {
                             Log.i("TAG", "ITEM FOUND IN MENU");
                             String price = tempItem.getPrice();
-                            String result = String.valueOf(Integer.parseInt(price) * qty);
-                            OrderedItem ob = new OrderedItem(transactionId, name, String.valueOf(qty), price, result);
-                            String key = toOrderedItems.push().getKey();
-                            toOrderedItems.child(key).setValue(ob);
+                            orderedItemHashMap.put(tempItem.getUid(), new OrderedItem(name, String.valueOf(qty), price, String.valueOf((Integer.parseInt(price) * qty))));
                             break;
                         }
                     }
 
                 }
+                toOrderedItems.child(transactionId).setValue(orderedItemHashMap);
             }
 
             @Override

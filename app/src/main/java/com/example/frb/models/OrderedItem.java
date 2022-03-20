@@ -1,7 +1,6 @@
 package com.example.frb.models;
 
 public class OrderedItem {
-    String transactionId;
     String foodName;
     String qty;
     String price;
@@ -9,21 +8,13 @@ public class OrderedItem {
 
     public OrderedItem(){}
 
-    public OrderedItem(String transactionId, String foodName, String qty, String price, String result) {
-        this.transactionId = transactionId;
+    public OrderedItem(String foodName, String qty, String price, String result) {
         this.foodName = foodName;
         this.qty = qty;
         this.price = price;
         this.result = result;
     }
 
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
 
     public String getFoodName() {
         return foodName;
