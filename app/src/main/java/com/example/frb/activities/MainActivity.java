@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         checkDataEntered();
         String phoneNo = phone.getText().toString();
         if (check == 1) {
-            if (phoneNo.equals("admin") && (password.getText().toString().equals("admin"))){
+            if (phoneNo.equals("1") && (password.getText().toString().equals("admin"))){
                 startActivity(new Intent(view.getContext(), AdminHomeActivity.class));
             }
             else{
