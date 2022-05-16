@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class AdminViewOrderItemsActivity extends AppCompatActivity {
 
+    private TextView textViewTransactionId;
     private EditText editTextTotalAmount;
     private Integer totalAmount;
 
@@ -44,6 +45,7 @@ public class AdminViewOrderItemsActivity extends AppCompatActivity {
         dbref = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference().child("OrderedItems");
         recyclerView = findViewById(R.id.recyclerview_view_order);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        textViewTransactionId = findViewById(R.id.textViewTransactionId);
         editTextTotalAmount = findViewById(R.id.editTextTotalAmount);
         totalAmount = 0;
 
@@ -55,6 +57,7 @@ public class AdminViewOrderItemsActivity extends AppCompatActivity {
             Log.i("tid", transactionId);
 
         }
+        textViewTransactionId.setText(transactionId);
         //recyclerView.setAdapter(new OrderItemsAdapter(orderedItems));
 
         dbref.child(transactionId).addListenerForSingleValueEvent(new ValueEventListener() {
