@@ -3,6 +3,8 @@ package com.example.frb.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,9 @@ import java.util.ArrayList;
 
 public class AdminViewOrderItemsActivity extends AppCompatActivity {
 
+    private EditText editTextTotalAmount;
+    private Integer totalAmount;
+
     private String transactionId;
     private ArrayList<OrderedItem> orderedItems;
     private DatabaseReference dbref;
@@ -39,6 +44,8 @@ public class AdminViewOrderItemsActivity extends AppCompatActivity {
         dbref = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference().child("OrderedItems");
         recyclerView = findViewById(R.id.recyclerview_view_order);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        editTextTotalAmount = findViewById(R.id.editTextTotalAmount);
+        totalAmount = 0;
 
         Intent intentIn = getIntent();
         Bundle b = intentIn.getExtras();
@@ -57,9 +64,16 @@ public class AdminViewOrderItemsActivity extends AppCompatActivity {
 
                     OrderedItem orderedItem = snapshot1.getValue(OrderedItem.class);
                     Log.i("innside", "items with thransaction id spotted");
+
+                    int price = Integer.parseInt(orderedItem.getPrice());
+                    int qty = Integer.parseInt(orderedItem.getQty());
+
+                    totalAmount += price * qty;
+
                     orderedItems.add(orderedItem);
                     orderItemsAdapter = new OrderItemsAdapter(orderedItems);
                     recyclerView.setAdapter(orderItemsAdapter);
+                    editTextTotalAmount.setText(totalAmount.toString());
 
                 }
             }
@@ -69,6 +83,8 @@ public class AdminViewOrderItemsActivity extends AppCompatActivity {
 
             }
         });
+
+
 
 
 
