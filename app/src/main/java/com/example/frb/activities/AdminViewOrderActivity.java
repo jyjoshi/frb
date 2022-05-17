@@ -21,11 +21,6 @@ import java.util.ArrayList;
 
 public class AdminViewOrderActivity extends AppCompatActivity {
     DatabaseReference dbref;
-    private ArrayList<String> transactionId;
-    private ArrayList<String> phone;
-    private ArrayList<String> time;
-    private ArrayList<String> amount;
-    private ArrayList<String> token;
 
     private ArrayList<Bill> bills;
 
@@ -38,18 +33,12 @@ public class AdminViewOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_order);
 
-        token = new ArrayList<>();
-        transactionId = new ArrayList<>();
-        phone = new ArrayList<>();
-        time = new ArrayList<>();
-        amount = new ArrayList<>();
-
         bills = new ArrayList<>();
 
         dbref = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference("Bill");
 
         //initDataset();
-        Log.i("after initializing", String.valueOf((transactionId.size() )));
+        Log.i("after initializing", String.valueOf((bills.size() )));
 
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
@@ -64,15 +53,8 @@ public class AdminViewOrderActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Bill temp = dataSnapshot.getValue(Bill.class);
-                    /*transactionId.add(temp.getTransactionId());
-                    phone.add(temp.getPhone());
-                    amount.add(temp.getTotalPrice());
-                    time.add(temp.getTime());
-                    token.add(temp.getToken().toString());*/
-
                     bills.add(temp);
 
-                    Log.i("Check", "transaction"+transactionId);
                     viewOrderAdapter = new ViewOrderAdapter(com.example.frb.activities.AdminViewOrderActivity.this, bills);
                     recyclerView.setAdapter(viewOrderAdapter);
                 }
@@ -104,7 +86,7 @@ public class AdminViewOrderActivity extends AppCompatActivity {
 
                     bills.add(temp);
 
-                    Log.i("Check", "transaction"+transactionId);
+                    Log.i("Check", "transaction"+temp.getTransactionId());
                 }
 
             }
