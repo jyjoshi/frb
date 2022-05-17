@@ -26,6 +26,9 @@ public class AdminViewOrderActivity extends AppCompatActivity {
     private ArrayList<String> time;
     private ArrayList<String> amount;
     private ArrayList<String> token;
+
+    private ArrayList<Bill> bills;
+
     RecyclerView recyclerView;
     ViewOrderAdapter viewOrderAdapter;
     LinearLayoutManager linearLayoutManager;
@@ -40,6 +43,8 @@ public class AdminViewOrderActivity extends AppCompatActivity {
         phone = new ArrayList<>();
         time = new ArrayList<>();
         amount = new ArrayList<>();
+
+        bills = new ArrayList<>();
 
         dbref = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference("Bill");
 
@@ -59,13 +64,16 @@ public class AdminViewOrderActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Bill temp = dataSnapshot.getValue(Bill.class);
-                    transactionId.add(temp.getTransactionId());
+                    /*transactionId.add(temp.getTransactionId());
                     phone.add(temp.getPhone());
                     amount.add(temp.getTotalPrice());
                     time.add(temp.getTime());
-                    token.add(temp.getToken().toString());
+                    token.add(temp.getToken().toString());*/
+
+                    bills.add(temp);
+
                     Log.i("Check", "transaction"+transactionId);
-                    viewOrderAdapter = new ViewOrderAdapter(com.example.frb.activities.AdminViewOrderActivity.this, transactionId, phone, time, amount, token);
+                    viewOrderAdapter = new ViewOrderAdapter(com.example.frb.activities.AdminViewOrderActivity.this, bills);
                     recyclerView.setAdapter(viewOrderAdapter);
                 }
 
@@ -93,10 +101,9 @@ public class AdminViewOrderActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Bill temp = dataSnapshot.getValue(Bill.class);
-                    transactionId.add(temp.getTransactionId());
-                    phone.add(temp.getPhone());
-                    amount.add(temp.getTotalPrice());
-                    time.add(temp.getTime());
+
+                    bills.add(temp);
+
                     Log.i("Check", "transaction"+transactionId);
                 }
 

@@ -14,25 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.frb.R;
 import com.example.frb.activities.AdminViewOrderItemsActivity;
+import com.example.frb.models.Bill;
 
 import java.util.ArrayList;
 
 public class ViewOrderAdapter extends RecyclerView.Adapter<com.example.frb.adapters.ViewOrderAdapter.MyViewHolder>{
-    private ArrayList<String> transactionId;
-    private ArrayList<String> phone;
-    private ArrayList<String> time;
-    private ArrayList<String> amount;
-    private ArrayList<String> token;
 
+    private ArrayList<Bill> bills;
     private Context context;
     ImageView imageView;
-    public ViewOrderAdapter(Context context, ArrayList<String> transactionId, ArrayList<String> phone, ArrayList<String> time, ArrayList<String> amount, ArrayList<String> token){
-        this.amount = amount;
-        this.transactionId = transactionId;
-        this.phone = phone;
-        this.time = time;
+
+    public ViewOrderAdapter(Context context, ArrayList<Bill> bills){
         this.context = context;
-        this.token = token;
+        this.bills = bills;
     }
     @NonNull
     @Override
@@ -43,16 +37,16 @@ public class ViewOrderAdapter extends RecyclerView.Adapter<com.example.frb.adapt
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.getName().setText(token.get(position));
-        holder.getQty().setText(String.valueOf(phone.get(position)));
-        holder.getPrice().setText(String.valueOf(time.get(position)));
-        holder.getamount().setText(String.valueOf(amount.get(position)));
+        holder.getName().setText((bills.get(position).getToken().toString()));
+        holder.getQty().setText(String.valueOf(bills.get(position).getPhone()));
+        holder.getPrice().setText(String.valueOf(bills.get(position).getTime()));
+        holder.getamount().setText(String.valueOf(bills.get(position).getTotalPrice()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, AdminViewOrderItemsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                i.putExtra("transactionId", transactionId.get(position));
+                i.putExtra("transactionId", bills.get(position).getTransactionId());
                 context.startActivity(i);
             }
         });
@@ -62,7 +56,7 @@ public class ViewOrderAdapter extends RecyclerView.Adapter<com.example.frb.adapt
 
     @Override
     public int getItemCount() {
-        return transactionId.size();
+        return bills.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -72,10 +66,6 @@ public class ViewOrderAdapter extends RecyclerView.Adapter<com.example.frb.adapt
         TextView amount;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
-
-
-
             name = itemView.findViewById(R.id.cart_food_name);
             qty = itemView.findViewById(R.id.cart_food_qty);
             price = itemView.findViewById(R.id.cart_food_price);
