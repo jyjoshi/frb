@@ -9,6 +9,8 @@ public class DataModel {
     private ArrayList<OrderedItem> nestedList;
     private boolean isExpandable;
 
+    public DataModel(){}
+
     public DataModel(Bill bill, ArrayList<OrderedItem> itemList) {
         this.bill = bill;
         this.nestedList = itemList;
