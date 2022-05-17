@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.frb.R;
+import com.example.frb.adapters.OuterAdapter;
 import com.example.frb.adapters.ViewOrderAdapter;
 import com.example.frb.models.Bill;
+import com.example.frb.models.DataModel;
+import com.example.frb.models.OrderedItem;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,8 +26,11 @@ public class AdminViewOrderActivity extends AppCompatActivity {
     DatabaseReference dbref;
 
     private ArrayList<Bill> bills;
+    private ArrayList<DataModel> dataModels;
+    private ArrayList<OrderedItem> orderedItems;
 
     RecyclerView recyclerView;
+    OuterAdapter outerAdapter;
     ViewOrderAdapter viewOrderAdapter;
     LinearLayoutManager linearLayoutManager;
 
@@ -34,8 +40,10 @@ public class AdminViewOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_view_order);
 
         bills = new ArrayList<>();
+        orderedItems = new ArrayList<>();
+        dataModels = new ArrayList<>();
 
-        dbref = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference("Bill");
+        dbref = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference();
 
         //initDataset();
         Log.i("after initializing", String.valueOf((bills.size() )));
@@ -51,12 +59,20 @@ public class AdminViewOrderActivity extends AppCompatActivity {
         dbref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for(DataSnapshot dataSnapshot : snapshot.child("Bill").getChildren()){
+
                     Bill temp = dataSnapshot.getValue(Bill.class);
+                    orderedItems =new ArrayList<>();
+                    for(DataSnapshot snapshot1 : snapshot.child("OrderedItems").child(temp.getTransactionId()).getChildren()){
+                        orderedItems.add(snapshot.getValue(OrderedItem.class));
+                    }
                     bills.add(temp);
 
+                    dataModels.add(new DataModel(temp, orderedItems));
+
+                    outerAdapter = new OuterAdapter(com.example.frb.activities.AdminViewOrderActivity.this, dataModels);
                     viewOrderAdapter = new ViewOrderAdapter(com.example.frb.activities.AdminViewOrderActivity.this, bills);
-                    recyclerView.setAdapter(viewOrderAdapter);
+                    recyclerView.setAdapter(outerAdapter);
                 }
 
             }

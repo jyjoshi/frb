@@ -36,7 +36,8 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
 
     @Override
     public int getItemCount() {
-        return orderedItems.size();
+        if(orderedItems == null) return 0;
+        else return orderedItems.size();
     }
 
     public class NestedViewHolder extends RecyclerView.ViewHolder{

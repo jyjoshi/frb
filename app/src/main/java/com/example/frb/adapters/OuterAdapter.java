@@ -1,6 +1,7 @@
 package com.example.frb.adapters;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +26,14 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.ItemViewHold
 
     private ArrayList<DataModel> mList;
     private ArrayList<OrderedItem> nestedList;
+    private Context context;
 
 //    public OuterAdapter(ArrayList<Bill> bills){
 //        this.bills = bills;
 //    }
 
-    public OuterAdapter(ArrayList<DataModel> mList){
+    public OuterAdapter(Context context, ArrayList<DataModel> mList){
+        this.context = context;
         this.mList = mList;
     }
 
@@ -46,7 +49,7 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.ItemViewHold
 //        Bill bill = bills.get(position);
         DataModel dataModel = mList.get(position);
         Bill bill = dataModel.getBill();
-        holder.billToken.setText(bill.getToken());
+        holder.billToken.setText(bill.getToken().toString());
         holder.billPhone.setText(bill.getPhone());
         holder.billTime.setText(bill.getTime());
         holder.billAmount.setText(bill.getTotalPrice());
