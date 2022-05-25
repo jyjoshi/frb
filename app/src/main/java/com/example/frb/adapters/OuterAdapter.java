@@ -76,7 +76,9 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.ItemViewHold
             public void onClick(View view) {
                 dataModel.setExpandable(!dataModel.isExpandable());
                 nestedList = dataModel.getNestedList();
-                nestedList.add(0, new OrderedItem("Name", "Qty", "Price", "Result"));
+                if (nestedList.get(0).getFoodName() != "Name") {
+                    nestedList.add(0, new OrderedItem("Name", "Qty", "Price", "Result"));
+                }
                 notifyItemChanged(holder.getAdapterPosition());
 
             }
