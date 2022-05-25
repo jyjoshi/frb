@@ -1,11 +1,13 @@
 package com.example.frb.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.frb.R;
@@ -16,7 +18,9 @@ import java.util.ArrayList;
 public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedViewHolder> {
 
     private ArrayList<OrderedItem> orderedItems;
-    public NestedAdapter(ArrayList<OrderedItem> orderedItems){
+    private Context context;
+    public NestedAdapter(Context context, ArrayList<OrderedItem> orderedItems){
+        this.context = context;
         this.orderedItems = orderedItems;
     }
     @NonNull
@@ -28,6 +32,15 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
 
     @Override
     public void onBindViewHolder(@NonNull NestedViewHolder holder, int position) {
+        if(position == 0){
+            int red = ContextCompat.getColor(context,R.color.red);
+            holder.name.setTextColor(red);
+            holder.qty.setTextColor(red);
+            holder.price.setTextColor(red);
+            holder.result.setTextColor(red);
+
+
+        }
         holder.name.setText(orderedItems.get(position).getFoodName());
         holder.qty.setText(orderedItems.get(position).getQty());
         holder.price.setText(orderedItems.get(position).getPrice());

@@ -64,7 +64,7 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.ItemViewHold
             holder.mArrowImage.setImageResource(R.drawable.arrow_down);
         }
 
-        NestedAdapter nestedAdapter = new NestedAdapter(nestedList);
+        NestedAdapter nestedAdapter = new NestedAdapter(this.context, nestedList);
         holder.nestedRecyclerView.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext()));
         holder.nestedRecyclerView.setHasFixedSize(true);
         holder.nestedRecyclerView.setAdapter(nestedAdapter);
@@ -76,6 +76,7 @@ public class OuterAdapter extends RecyclerView.Adapter<OuterAdapter.ItemViewHold
             public void onClick(View view) {
                 dataModel.setExpandable(!dataModel.isExpandable());
                 nestedList = dataModel.getNestedList();
+                nestedList.add(0, new OrderedItem("Name", "Qty", "Price", "Result"));
                 notifyItemChanged(holder.getAdapterPosition());
 
             }
