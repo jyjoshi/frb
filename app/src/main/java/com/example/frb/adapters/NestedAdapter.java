@@ -38,9 +38,8 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.NestedView
             holder.qty.setTextColor(red);
             holder.price.setTextColor(red);
             holder.result.setTextColor(red);
-
-
         }
+
         holder.name.setText(orderedItems.get(position).getFoodName());
         holder.qty.setText(orderedItems.get(position).getQty());
         holder.price.setText(orderedItems.get(position).getPrice());
