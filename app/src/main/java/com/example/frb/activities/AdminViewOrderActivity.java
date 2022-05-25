@@ -64,7 +64,7 @@ public class AdminViewOrderActivity extends AppCompatActivity {
                     Bill temp = dataSnapshot.getValue(Bill.class);
                     orderedItems =new ArrayList<>();
                     for(DataSnapshot snapshot1 : snapshot.child("OrderedItems").child(temp.getTransactionId()).getChildren()){
-                        orderedItems.add(snapshot.getValue(OrderedItem.class));
+                        orderedItems.add(snapshot1.getValue(OrderedItem.class));
                     }
                     bills.add(temp);
 
