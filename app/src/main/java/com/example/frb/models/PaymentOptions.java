@@ -4,6 +4,13 @@ public class PaymentOptions {
     private BankDetails bankDetails;
     private String rzp;
 
+    public PaymentOptions(){}
+
+    public PaymentOptions(BankDetails bankDetails, String rzp) {
+        this.bankDetails = bankDetails;
+        this.rzp = rzp;
+    }
+
     public BankDetails getBankDetails() {
         return bankDetails;
     }

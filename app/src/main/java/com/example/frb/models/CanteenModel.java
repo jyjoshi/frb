@@ -5,16 +5,21 @@ import java.util.ArrayList;
 public class CanteenModel {
     private String canteenUid;
     private ArrayList<MenuItem> menuItems;
-    private BankDetails bankDetails;
+    private PaymentOptions paymentOptions;
     private ProfileDetails profileDetails;
     private OperationalVariables operationalVariables;
 
-    public CanteenModel(){}
-
-    public CanteenModel(String canteenUid, ArrayList<MenuItem> menuItems, BankDetails bankDetails, ProfileDetails profileDetails, OperationalVariables operationalVariables) {
+    public CanteenModel(String canteenUid, ArrayList<MenuItem> menuItems, PaymentOptions paymentOptions, ProfileDetails profileDetails, OperationalVariables operationalVariables) {
         this.canteenUid = canteenUid;
         this.menuItems = menuItems;
-        this.bankDetails = bankDetails;
+        this.paymentOptions = paymentOptions;
+        this.profileDetails = profileDetails;
+        this.operationalVariables = operationalVariables;
+    }
+
+    public CanteenModel(String canteenUid, PaymentOptions paymentOptions, ProfileDetails profileDetails, OperationalVariables operationalVariables) {
+        this.canteenUid = canteenUid;
+        this.paymentOptions = paymentOptions;
         this.profileDetails = profileDetails;
         this.operationalVariables = operationalVariables;
     }
@@ -35,12 +40,12 @@ public class CanteenModel {
         this.menuItems = menuItems;
     }
 
-    public BankDetails getBankDetails() {
-        return bankDetails;
+    public PaymentOptions getPaymentOptions() {
+        return paymentOptions;
     }
 
-    public void setBankDetails(BankDetails bankDetails) {
-        this.bankDetails = bankDetails;
+    public void setPaymentOptions(PaymentOptions paymentOptions) {
+        this.paymentOptions = paymentOptions;
     }
 
     public ProfileDetails getProfileDetails() {

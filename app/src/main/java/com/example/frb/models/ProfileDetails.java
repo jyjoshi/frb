@@ -7,6 +7,12 @@ public class ProfileDetails {
 
     public ProfileDetails(){}
 
+    public ProfileDetails(String name, String password, String phone) {
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+    }
+
     public String getName() {
         return name;
     }
