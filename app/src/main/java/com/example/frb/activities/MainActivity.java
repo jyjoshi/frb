@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void toSignUp(View view){
         Intent intent = new Intent(getBaseContext(),SignUpActivity.class);
-        intent.putExtra("entryPoint", "Main"); // Signifying that the user is a student.
+        intent.putExtra("entryPoint", "Main");
         startActivity(intent);
     }
 

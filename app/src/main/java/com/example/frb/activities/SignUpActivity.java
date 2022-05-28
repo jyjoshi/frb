@@ -25,7 +25,6 @@ public class SignUpActivity extends AppCompatActivity {
     int check =1;
     private String entryPoint;
     EditText name;
-    EditText lastName;
     EditText password;
     EditText confirmPassword;
     EditText phone;
