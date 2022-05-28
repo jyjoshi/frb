@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     EditText phone;
     EditText password;
-    String firstName;
-    String lastName;
     String name;
 
     @Override
