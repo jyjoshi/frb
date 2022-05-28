@@ -88,4 +88,5 @@
     <string name="status">Status</string>
     <string name="sign_out">Sign Out</string>
     <string name="canteen_name">Canteen Name</string>
+    <string name="bank_account_number">Bank Account Number</string>
 </resources>

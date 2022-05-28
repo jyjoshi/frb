@@ -1,9 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SignUpPaymentDetailsActivity">
+    android:gravity="center"
+    android:background="@color/gray"
+    android:orientation="vertical"
+    tools:context=".activities.SignUpProfileDetailsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/textViewBankAccNo"
+        android:layout_width="246dp"
+        android:layout_height="wrap_content"
+        android:text="@string/bank_account_number"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="140dp" />
+
+    <EditText
+        android:id="@+id/editTextBankAccNo"
+        android:layout_width="246dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="Enter your Bank Account Number"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        tools:ignore="LabelFor"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="164dp" />
+
+
+    <TextView
+        android:id="@+id/textViewAccHolderName"
+        android:layout_width="246dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Account Holder Name"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="294dp"/>
+
+    <EditText
+        android:id="@+id/editTextAccHolderName"
+        android:layout_width="246dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="Enter Account Holder's Name"
+        android:ems="10"
+        android:textColor="@color/white"
+        android:inputType="phone"
+        tools:ignore="LabelFor"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="318dp" />
+
+    <TextView
+        android:id="@+id/textViewIFSCCode"
+        android:layout_width="246dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="IFSC Code"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="294dp"/>
+
+    <EditText
+        android:id="@+id/editTextIFSCCode"
+        android:layout_width="246dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="Enter IFSC Code"
+        android:textColorHint="@color/white"
+        android:ems="10"
+        android:textColor="@color/white"
+        android:inputType="phone"
+        tools:ignore="LabelFor"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="318dp" />
+
+    <TextView
+        android:id="@+id/textViewRzpKey"
+        android:layout_width="246dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Razorpay Key"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="294dp"/>
+
+    <EditText
+        android:id="@+id/editTextRzpKey"
+        android:layout_width="246dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="Enter Razorpay Key"
+        android:ems="10"
+        android:textColor="@color/white"
+        android:inputType="phone"
+        tools:ignore="LabelFor"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="318dp" />
+
+
+
+    <Button
+        android:id="@+id/uploadFood"
+        android:layout_width="246dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="processRegistration"
+        android:text="@string/register"
+
+        android:textColor="@color/white"
+        app:backgroundTint="@color/colorPrimary"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="501dp" />
+
+
+</LinearLayout>
