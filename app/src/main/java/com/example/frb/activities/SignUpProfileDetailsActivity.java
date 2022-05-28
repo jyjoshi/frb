@@ -108,7 +108,8 @@ public class SignUpProfileDetailsActivity extends AppCompatActivity {
                                 name.getText().toString(),
                                 password.getText().toString());
 
-                        Intent intent = new Intent(getApplicationContext(), com.example.frb.activities.VerifyPhoneActivity.class);
+//                        Intent intent = new Intent(getApplicationContext(), com.example.frb.activities.VerifyPhoneActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), com.example.frb.activities.SignUpPaymentDetailsActivity.class);
                         intent.putExtra("requirement", "sign_up");
                         intent.putExtra("entryPoint", entryPoint);
                         intent.putExtra("phoneNo", canteen.getPhone());
