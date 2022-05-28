@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpProfileDetailsActivity extends AppCompatActivity {
     int check =1;
     private String entryPoint;
     EditText name;

@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void toSignUp(View view){
-        Intent intent = new Intent(getBaseContext(),SignUpActivity.class);
+        Intent intent = new Intent(getBaseContext(), SignUpProfileDetailsActivity.class);
         intent.putExtra("entryPoint", "Main");
         startActivity(intent);
     }

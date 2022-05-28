@@ -59,7 +59,7 @@
             android:name=".activities.MenuEditorActivity"
             android:parentActivityName=".activities.AdminHomeActivity" />
         <activity
-            android:name=".activities.SignUpActivity"
+            android:name=".activities.SignUpProfileDetailsActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.MainActivity"
