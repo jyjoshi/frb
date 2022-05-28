@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
+        <activity
+            android:name=".activities.SignUpPaymentDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.AdminCartActivity"
             android:exported="false" />
@@ -64,8 +66,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.Frb.NoActionBar"
-            />
+            android:theme="@style/Theme.Frb.NoActionBar" />
         <activity
             android:name=".activities.SplashScreen"
             android:exported="true"
