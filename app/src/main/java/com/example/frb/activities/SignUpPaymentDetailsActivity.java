@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
@@ -15,6 +16,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class SignUpPaymentDetailsActivity extends AppCompatActivity {
+
+    private int check = 1;
 
     private String canteenName;
     private String canteenPhone;
@@ -42,6 +45,27 @@ public class SignUpPaymentDetailsActivity extends AppCompatActivity {
 
         Intent intentIn = getIntent();
         Bundle b = intentIn.getExtras();
+
+    }
+
+    boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
+
+    void checkDataEntered() {
+
+        if (isEmpty(editTextAccHolderName)) {
+            editTextAccHolderName.setError("Name is required");
+            check=0;
+        }
+        if (isEmpty(editTextBankAccNo)) {
+            editTextBankAccNo.setError("Phone is required");
+            check=0;
+        }
+        if (isEmpty(editTextIFSCCode)){
+            editTextIFSCCode.setText("IFSC Code is required");
+        }
 
     }
 
