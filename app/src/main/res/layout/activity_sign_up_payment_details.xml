@@ -7,7 +7,7 @@
     android:gravity="center"
     android:background="@color/gray"
     android:orientation="vertical"
-    tools:context=".activities.SignUpProfileDetailsActivity">
+    tools:context=".activities.SignUpPaymentDetailsActivity">
 
     <TextView
         android:id="@+id/textViewBankAccNo"
@@ -38,7 +38,7 @@
         android:layout_width="246dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Account Holder Name"
+        android:text="@string/account_holder_name"
         android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp"
@@ -62,7 +62,7 @@
         android:layout_width="246dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="IFSC Code"
+        android:text="@string/ifsc_code"
         android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp"
@@ -87,7 +87,7 @@
         android:layout_width="246dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Razorpay Key"
+        android:text="@string/razorpay_key"
         android:textColor="@color/white"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp"
@@ -114,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:onClick="processRegistration"
-        android:text="Register Canteen"
+        android:text="@string/register_canteen"
 
         android:textColor="@color/white"
         app:backgroundTint="@color/colorPrimary"

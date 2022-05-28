@@ -90,4 +90,8 @@
     <string name="canteen_name">Canteen Name</string>
     <string name="bank_account_number">Bank Account Number</string>
     <string name="next">Next</string>
+    <string name="register_canteen">Register Canteen</string>
+    <string name="razorpay_key">Razorpay Key</string>
+    <string name="ifsc_code">IFSC Code</string>
+    <string name="account_holder_name">Account Holder Name</string>
 </resources>
