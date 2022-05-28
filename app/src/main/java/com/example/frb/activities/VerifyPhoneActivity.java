@@ -35,11 +35,9 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     Button verify_btn;
     EditText otp;
     ProgressBar progressBar;
-    String verificationId;
 
     String phone;
     String name;
-    String lastName;
     String password;
 
     String requirement;
@@ -172,28 +170,6 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         }
     };
 
-//    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-//        @Override
-//        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-//            super.onCodeSent(s, forceResendingToken);
-//            verificationId = s;
-//
-//        }
-//
-//        @Override
-//        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-//            String code = phoneAuthCredential.getSmsCode();
-//            if(code!=null){
-//                progressBar.setVisibility(View.VISIBLE);
-//                verifyCode(code);
-//            }
-//        }
-//
-//        @Override
-//        public void onVerificationFailed(@NonNull FirebaseException e) {
-//            Toast.makeText(VerifyPhoneActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//        }
-//    };
     private void verifyCode(String codeByUser){
         //Code change error
         try {
