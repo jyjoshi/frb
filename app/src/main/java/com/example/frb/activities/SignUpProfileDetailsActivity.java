@@ -85,7 +85,7 @@ public class SignUpProfileDetailsActivity extends AppCompatActivity {
 
     }
 
-    public void processRegistration(View view){
+    public void toSignUpPaymentDetails(View view){
         Log.i("Log","Entered the function");
         check = 1;
         checkDataEntered();//no problem here
