@@ -109,12 +109,12 @@
 
 
     <Button
-        android:id="@+id/uploadFood"
+        android:id="@+id/registerCanteenBtn"
         android:layout_width="246dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:onClick="processRegistration"
-        android:text="@string/register"
+        android:text="Register Canteen"
 
         android:textColor="@color/white"
         app:backgroundTint="@color/colorPrimary"
