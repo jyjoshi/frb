@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.frb.R;
 import com.example.frb.models.Bill;
 import com.example.frb.models.Canteen;
+import com.example.frb.models.CanteenModel;
 import com.example.frb.models.UserDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,12 +34,15 @@ public class MainActivity extends AppCompatActivity {
     int check=1;
     int check2 = 0;
 
+    private String canteenUid;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/");
     DatabaseReference dbRef = database.getReference();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     EditText phone;
     EditText password;
     String name;
+    private String phoneNumber; //Created for mapping phone to CanteenUid for token storage in the canteens class.
 
     @Override
     public void onStart() {
@@ -79,12 +83,24 @@ public class MainActivity extends AppCompatActivity {
         if(currentUser != null){
             String phoneNo = currentUser.getPhoneNumber().substring(3);
             Log.d("FirebaseAuth Phone", "Phone Number is " + phoneNo);
-            FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference("Canteens").child(phoneNo).addListenerForSingleValueEvent(new ValueEventListener() {
+            FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference("PhoneCanteenMap").child(phoneNo).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
-                        Canteen canteen = snapshot.getValue(Canteen.class);
-                        name = canteen.getName();
+                        canteenUid = snapshot.getValue(String.class);
+                        FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference("Canteens").child(canteenUid).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                CanteenModel canteenModel = snapshot.getValue(CanteenModel.class);
+                                name = canteenModel.getProfileDetails().getName();
+                                phoneNumber = canteenModel.getProfileDetails().getPhone();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
 
                     FirebaseMessaging.getInstance().getToken()
@@ -124,7 +140,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateMessagingToken(String phoneNumber, String messagingToken) {
-        FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference().child("CanteenMessageIds").child(phoneNumber).setValue(messagingToken);
+//        FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference().child("CanteenMessageIds").child(phoneNumber).setValue(messagingToken);
+        FirebaseDatabase.getInstance("https://canteen-management-systems-20a8c.asia-southeast1.firebasedatabase.app/").getReference("Canteens").child(canteenUid).child("operationalVariables").child("messageId").setValue(messagingToken);
+
+
     }
 
     @Override
