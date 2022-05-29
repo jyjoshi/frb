@@ -248,6 +248,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                         menuItems.add(menuItem);
                         menuItems.add(menuItem1);
 
+                        reference.child("PhoneCanteenMap").child(phone).setValue(canteenUid);
+
                         canteenModel = new CanteenModel(canteenUid, menuItems, paymentOptions, profileDetails, operationalVariables);
 
                         reference.child("Canteens").child(canteenUid).setValue(canteenModel);
