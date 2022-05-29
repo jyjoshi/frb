@@ -3,6 +3,7 @@ package com.example.frb.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.frb.R;
+import com.example.frb.models.BankDetails;
 import com.example.frb.models.Canteen;
+import com.example.frb.models.CanteenModel;
+import com.example.frb.models.MenuItem;
+import com.example.frb.models.OperationalVariables;
+import com.example.frb.models.PaymentOptions;
+import com.example.frb.models.ProfileDetails;
 import com.example.frb.models.UserDB;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +35,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class VerifyPhoneActivity extends AppCompatActivity {
@@ -46,10 +54,26 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     UserDB user;
     DatabaseReference reference;
 
+    String canteenUid;
+
     FirebaseAuth mAuth;
     Boolean verificationOngoing = false;
     String mVerificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
+
+    private String canteenPhone;
+    private String canteenName;
+    private String canteenPassword;
+    private String bankAccNo;
+    private String accHolderName;
+    private String ifscCode;
+    private String rzpKey;
+
+    private ProfileDetails  profileDetails;
+    private BankDetails bankDetails;
+    private PaymentOptions paymentOptions;
+
+    private CanteenModel canteenModel;
 
     private static final String TAG = "VerifyPhoneActivity";
 
@@ -66,8 +90,17 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             requirement = (String) b.get("requirement");
             if(requirement.equals("sign_up")) {
                 entryPoint = (String) b.get("entryPoint");
-                name = (String) b.get("name");
-                password = (String) b.get("password");
+
+                canteenName = (String) b.get("name");
+                canteenPassword = (String) b.get("password");
+
+                bankAccNo = (String) b.get("accNo");
+                accHolderName = (String) b.get("holderName");
+                ifscCode = (String) b.get("ifsc");
+                rzpKey = (String) b.get("rzpKey");
+//                profileDetails = (ProfileDetails) b.get("profileDetails");
+//                paymentOptions = (PaymentOptions) b.get("paymentOptions");
+
             }
         }
 
@@ -83,7 +116,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
 //        sendVerificationCodeToUser(phone);
 
-
+        Log.i("PhoneValue ", phone);
         mAuth = FirebaseAuth.getInstance();
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
@@ -194,8 +227,31 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     //Do what you want.
                     if(requirement.equals("sign_up")) {
-                        Canteen canteen = new Canteen(phone, name, password);
-                        reference.child("Canteens").child(phone).setValue(canteen);
+
+                        canteenUid = reference.child("Canteens").push().getKey();
+
+//                        Canteen canteen = new Canteen(phone, name, password);
+
+                        profileDetails = new ProfileDetails(canteenName, canteenPassword, phone);
+                        bankDetails = new BankDetails(bankAccNo, ifscCode, accHolderName);
+                        paymentOptions = new PaymentOptions(bankDetails, rzpKey);
+
+                        OperationalVariables operationalVariables = new OperationalVariables(1000, "null", true);
+
+                        String menuItemUid = reference.child("Canteens").child(canteenUid).child("menuItems").push().getKey();
+                        String menuItemUid1 = reference.child("Canteens").child(canteenUid).child("menuItems").push().getKey();
+
+                        MenuItem menuItem = new MenuItem("", menuItemUid, "test_name", "test_description", String.valueOf(100));
+                        MenuItem menuItem1 = new MenuItem("", menuItemUid1, "test_name_1", "test_description_1", String.valueOf(200));
+
+                        ArrayList<MenuItem> menuItems = new ArrayList<>();
+                        menuItems.add(menuItem);
+                        menuItems.add(menuItem1);
+
+                        canteenModel = new CanteenModel(canteenUid, menuItems, paymentOptions, profileDetails, operationalVariables);
+
+                        reference.child("Canteens").child(canteenUid).setValue(canteenModel);
+
                         Toast.makeText(com.example.frb.activities.VerifyPhoneActivity.this, "Account successfully created!", Toast.LENGTH_SHORT).show();
                         try {
                             TimeUnit.SECONDS.sleep(2);

@@ -37,6 +37,9 @@ public class SignUpPaymentDetailsActivity extends AppCompatActivity {
     private EditText editTextIFSCCode;
     private EditText editTextRzpKey;
 
+    private String requirement;
+    private String entryPoint;
+
     private PaymentOptions paymentOptions;
     private BankDetails bankDetails;
     private ProfileDetails profileDetails;
@@ -61,9 +64,11 @@ public class SignUpPaymentDetailsActivity extends AppCompatActivity {
         Intent intentIn = getIntent();
         Bundle b = intentIn.getExtras();
 
+        requirement = (String) b.get("requirement");
+        entryPoint = (String) b.get("entryPoint");
         canteenName = (String) b.get("name");
         canteenPassword = (String) b.get("password");
-        canteenPassword = (String) b.get("phoneNo");
+        canteenPhone = (String) b.get("phoneNo");
 
 
 
@@ -88,7 +93,7 @@ public class SignUpPaymentDetailsActivity extends AppCompatActivity {
             editTextIFSCCode.setText("IFSC Code is required");
         }
         if (isEmpty(editTextRzpKey)){
-            rzpKey = null;
+            rzpKey = "null";
         }
 
     }
@@ -100,6 +105,9 @@ public class SignUpPaymentDetailsActivity extends AppCompatActivity {
             bankAccNo = editTextBankAccNo.getText().toString();
             ifscCode = editTextIFSCCode.getText().toString();
             accHolderName = editTextAccHolderName.getText().toString();
+            rzpKey = editTextRzpKey.getText().toString();
+
+
 
             profileDetails = new ProfileDetails(canteenName, canteenPassword, canteenPhone);
             bankDetails = new BankDetails(bankAccNo, ifscCode, accHolderName);
@@ -107,15 +115,17 @@ public class SignUpPaymentDetailsActivity extends AppCompatActivity {
             paymentOptions = new PaymentOptions(bankDetails, rzpKey);
 
             Intent intent = new Intent(getApplicationContext(), com.example.frb.activities.VerifyPhoneActivity.class);
-//            intent.putExtra("phoneNo", canteenPhone);
-//            intent.putExtra("name", canteenName);
-//            intent.putExtra("password", canteenPassword);
-//            intent.putExtra("accNo", bankAccNo);
-//            intent.putExtra("holderName", accHolderName);
-//            intent.putExtra("ifsc", ifscCode);
-
-            intent.putExtra("profileDetails", (Parcelable) profileDetails);
-            intent.putExtra("paymentOptions", (Parcelable) paymentOptions);
+            intent.putExtra("phoneNo", canteenPhone);
+            intent.putExtra("name", canteenName);
+            intent.putExtra("password", canteenPassword);
+            intent.putExtra("accNo", bankAccNo);
+            intent.putExtra("holderName", accHolderName);
+            intent.putExtra("ifsc", ifscCode);
+            intent.putExtra("rzpKey", rzpKey);
+            intent.putExtra("requirement", requirement);
+            intent.putExtra("entryPoint", entryPoint);
+//            intent.putExtra("profileDetails", (Parcelable) profileDetails);
+//            intent.putExtra("paymentOptions", (Parcelable) paymentOptions);
 
             startActivity(intent);
 

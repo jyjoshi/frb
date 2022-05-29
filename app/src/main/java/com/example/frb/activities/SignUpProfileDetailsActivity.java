@@ -95,13 +95,13 @@ public class SignUpProfileDetailsActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     int check = 1; // Check if an account with the given phone number already exists.
-                    for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                        UserDB temp = snapshot1.getValue(UserDB.class);
-                        if(temp.getPhone().equals(phone.getText().toString())){
-                            check = 0;
-                            phone.setError("Number is already registered.");
-                        }
-                    }
+//                    for(DataSnapshot snapshot1 : snapshot.getChildren()){
+//                        UserDB temp = snapshot1.getValue(UserDB.class);
+//                        if(temp.getPhone().equals(phone.getText().toString())){
+//                            check = 0;
+//                            phone.setError("Number is already registered.");
+//                        }
+//                    }
                     if(check==1){
                         Canteen canteen = new Canteen(
                                 phone.getText().toString(),
