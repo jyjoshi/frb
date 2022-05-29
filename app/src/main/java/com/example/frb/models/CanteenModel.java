@@ -9,6 +9,8 @@ public class CanteenModel {
     private ProfileDetails profileDetails;
     private OperationalVariables operationalVariables;
 
+    public CanteenModel(){}
+
     public CanteenModel(String canteenUid, ArrayList<MenuItem> menuItems, PaymentOptions paymentOptions, ProfileDetails profileDetails, OperationalVariables operationalVariables) {
         this.canteenUid = canteenUid;
         this.menuItems = menuItems;

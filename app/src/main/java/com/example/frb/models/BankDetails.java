@@ -7,6 +7,8 @@ public class BankDetails {
     private String bankName;
     private String bankMMID;
 
+    public BankDetails(){}
+
     public String getAccountNumber() {
         return accountNumber;
     }
