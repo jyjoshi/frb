@@ -46,7 +46,6 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 - **Aman Singh** - *Optimizations* - [Aman Singh](https://github.com/Aman-A-Singh)
 - **Sanket Halake** - *Frontend Implementation* - [Sanket Halake](https://github.com/sankethalake)
 - **Anant Rajpurohit** - *Frontend Design* - [Anant Rajpurohit](https://github.com/)
-- 
 
 ## License
 
