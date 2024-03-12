@@ -2,7 +2,8 @@
 
 ## Overview
 
-This project is designed to create an application similar to Uber Eats, focusing on the browsing and ordering aspects without the food delivery pipeline. It is developed using Java for Android, providing a mobile platform solution for users to explore menus, place orders, and manage their food preferences from different restaurants.
+This project is an extension of the base project [FoodReady](https://github.com/jyjoshi/cms). 
+The extension focuses on the vendors' aspects by handling UI and business logic, facilitating order management, sales analytics, and menu updates. 
 
 ## Getting Started
 
